@@ -11,7 +11,7 @@
 <th>Autor</th>
  </tr>
 <?php
-$servername = "localhost";
+$servername = "database-2.cteosqgqap8n.us-east-1.rds.amazonaws.com";
 $database = "articulos";
 $username = "dbadmin";
 $password = "dbadmin";
