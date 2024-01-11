@@ -1,34 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividad 2</title>
+ <title>Libros</title>
 </head>
 <body>
-    <?php
-        $nombre = "Laura";
-        $apellido = "Sánchez Iglesias";
-        $numero1 = $_REQUEST["num1"];
-        $numero2 = $_REQUEST["num2"];
-        $operacion;
-
-        echo "<h1>$nombre  $apellido</h1>";
-
-        echo "<h2> Los operadores son: $numero1 y $numero2 </h2> ";
-
-        $operacion = $numero1 + $numero2;
-        echo "<p> La suma es $operacion </p>";
-
-        $operacion = $numero1 - $numero2;
-        echo "<p> La resta es $operacion </p>";
-
-        $operacion = $numero1 * $numero2;
-        echo "<p> La multiplicacion es $operacion </p>";
-
-        $operacion = $numero1 / $numero2;
-        echo "<p> La division es $operacion </p>";
-    ?>
-    
+<h1>Lista de libros</h1>
+ <table border="2">
+ <tr>
+ <th>ID</th>
+<th>Título</th>
+<th>Autor</th>
+ </tr>
+<?php
+$servername = "localhost";
+$database = "articulos";
+$username = "dbadmin";
+$password = "dbadmin";
+// Create connection
+$conn = mysqli_connect($servername, $username, $password,
+$database);
+// Check connection
+if (!$conn) {
+ die("Connection failed: " . mysqli_connect_error());
+}
+$sql = "SELECT id, titulo, autor FROM libros";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+ // output data of each row
+ while($row = mysqli_fetch_assoc($result)) {
+ echo
+"<tr><td>".$row["id"]."</td><td>".$row["titulo"]."</td><td>
+".$row["autor"]."</td></tr>";
+ }
+ echo "</table>";
+} else {
+ echo "0 results";
+}
+mysqli_close($conn);
+?>
 </body>
 </html>
